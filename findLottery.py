@@ -8,8 +8,8 @@ list_lottery = [
                     ['Zeit nehmen'],
                     ['Werbung'],
                     ['gewinnen'],
-                    ['Sie'],
-                    ['Projekt']
+                    ['Projekt'],
+                    ['']
                 ]
 
 df = pd.read_csv('csvs/output/reweAnca.csv', delimiter=',', encoding='iso-8859-1')
