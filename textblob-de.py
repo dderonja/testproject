@@ -1,6 +1,6 @@
 from textblob_de import TextBlobDE
 import pandas as pd
-import re
+
 
 df = pd.read_csv('csvs/output/reweChecked.csv', delimiter=',', encoding='iso-8859-1')
 counter = 0
