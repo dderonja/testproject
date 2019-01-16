@@ -81,8 +81,13 @@ class AdCheck:
     def check_for_ad(text):
 
         test = TextBlob(text)
+        print(text)
+        print(test)
+        print(test.words)
+        print(len(test.words))
+        print(re.search('https', text, re.IGNORECASE))
 
-        if (len(test.words) == 1 or len(test.words) == 2) and (
+        if (re.search(' ', text, re.IGNORECASE)) is None and (
                 re.search('https', text, re.IGNORECASE) or re.search('http', text, re.IGNORECASE) or re.search('www',
                                                                                                                text,
                                                                                                                re.IGNORECASE)):

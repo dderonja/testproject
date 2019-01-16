@@ -1,12 +1,17 @@
 
 import json
 from pycorenlp import StanfordCoreNLP
+from googletrans import Translator
+from textblob import TextBlob
 host = "http://localhost"
 port = "9000"
 nlp = StanfordCoreNLP(host + ":" + port)
-text = "das sind überragende neuigkeiten"
+text = 'test'
+test = TextBlob(text)
+
+print(text)
 output = nlp.annotate(
-    text,
+    test.string,
     properties={
         "outputFormat": "json",
         "annotators": "sentiment"

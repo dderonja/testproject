@@ -2,6 +2,7 @@ from tkinter import *
 from classes.text_blob_de import TextBlobClass
 from classes.checkForAds import AdCheck
 
+
 def callback():
     entered_text = textentry.get("1.0", 'end-1c')
     a = AdCheck

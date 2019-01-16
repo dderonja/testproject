@@ -1,6 +1,7 @@
 import pandas as pd
 import re
 from textblob import TextBlob as TextBlob
+from langdetect import detect
 import numpy as np
 
 list_ads = [
@@ -37,6 +38,8 @@ list_ads = [
                     'webseite',
                     'hilfe bitten',
                     'hilfe ',
+                    'hier',
+                    'hier bei uns im shop'
 
 
 
@@ -71,26 +74,34 @@ list_thank_you = [
     'grÃ¼ÃŸe',
     'gruss',
     'gruÃŸ',
-    'bedank'
+    'bedank',
+    'hier',
+    'uns'
 
 ]
 
 df = pd.read_csv('csvs/output/reweAnca.csv', delimiter=',', encoding='iso-8859-1')
 counter = 0
 for idx, row in df.iterrows():
-    # counter = counter + 1
-    # if counter > 100:
-    #   break
+    counter = counter + 1
+    if counter > 500:
+        break
     if pd.notnull(df.loc[idx, 'Nachricht']):
 
         text = df.loc[idx, 'Nachricht']
         test = TextBlob(text)
 
-        if (len(test.words) == 1 or len(test.words) == 2) and (re.search('https', text, re.IGNORECASE) or re.search('http', text, re.IGNORECASE) or re.search('www', text, re.IGNORECASE)):
+        if (re.search(' ', text, re.IGNORECASE)) is None and (
+                re.search('https', text, re.IGNORECASE) or re.search('http', text, re.IGNORECASE) or re.search('www',
+                                                                                                               text,
+                                                                                                               re.IGNORECASE) or re.search('bit.ly',
+                                                                                                               text,
+                                                                                                               re.IGNORECASE)):
             df.loc[idx, 'Projektergebnis'] = 'Only Link'
+            continue
         # check language
         print(test)
-        language = 'de'
+        language = detect(test.string)
         if language == 'de':
             containsLink = False
             containsGreeting = False
