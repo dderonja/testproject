@@ -1,8 +1,7 @@
 import pandas as pd
 
 df = pd.read_csv('csvs/input/rewe.csv', delimiter=',', encoding='utf-8')
-# Hinzufügen des Attributes "Projektergebnis"
-# df.insert(loc=10, column='Projektergebnis', value='')
+
 
 # Entfernen von nicht benötigten Attributen
 df.drop('ID', axis=1, inplace=True)
@@ -13,6 +12,9 @@ df.drop('Typ', axis=1, inplace=True)
 df.drop('Name des Autors', axis=1, inplace=True)
 df.drop('Profil des Autors', axis=1, inplace=True)
 df.drop('URL', axis=1, inplace=True)
+
+# Hinzufügen des Attributes "Projektergebnis"
+df.insert(loc=2, column='Projektergebnis', value='')
 
 # Ersetze Umbrüche mit Leerzeichen
 df = df.replace('\n', ' ', regex=True)

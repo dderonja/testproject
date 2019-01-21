@@ -15,7 +15,7 @@ for idx, row in df.iterrows():
     counter = counter + 1
     print(counter)
     category = df.loc[idx, 'Kategorie']
-    if counter > 1500:
+    if counter > 70000:
         break
     if pd.notnull(df.loc[idx, 'Nachricht']) and df.loc[idx, 'Projektergebnis'] != 'Englisch' and df.loc[idx, 'Projektergebnis'] != 'Werbung' and df.loc[idx, 'Projektergebnis'] != 'Only Link':
         text = df.loc[idx, 'Nachricht']
@@ -27,27 +27,17 @@ for idx, row in df.iterrows():
                 "annotators": "sentiment"
             }
         )
-
-        # json = json.loads(output)
         sentiment = output[output.index('sentiment":') + 13:output.index('sentiment":') + 20]
 
-
         if sentiment == 'Negativ':
-            sentiment = 'negativ '
+            sentiment = 'negativ'
             df.loc[idx, 'Projektergebnis'] = sentiment
         if sentiment == 'Positiv':
-            sentiment = 'positiv '
+            sentiment = 'positiv'
+            df.loc[idx, 'Projektergebnis'] = sentiment
         if sentiment == 'Neutral':
-            sentiment = 'neutral '
-
-        if sentiment == df.loc[idx, 'Kategorie']:
-
-            counter_right = counter_right + 1
+            sentiment = 'neutral'
+            df.loc[idx, 'Projektergebnis'] = sentiment
 
 
-
-
-
-print(counter_right)
-print(counter)
 df.to_csv("csvs/output/rewePolarity.csv", encoding='utf-8', sep=',', index=False)
